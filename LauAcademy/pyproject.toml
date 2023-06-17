@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.10"
 streamlit = "^1.23.1"
 pydantic = "^1.10.9"
+bs4 = "^0.0.1"
 
 
 [build-system]
