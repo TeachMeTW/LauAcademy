@@ -264,16 +264,6 @@ files = [
     {file = "decorator-5.1.1.tar.gz", hash = "sha256:637996211036b6385ef91435e4fae22989472f9d571faba8927ba8253acbc330"},
 ]
 
-[[package]]
-name = "elevenlab"
-version = "0.0.1"
-description = "An Unofficial Asynchronous Python version of elevenlabs API wrapper"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "elevenlab-0.0.1-py3-none-any.whl", hash = "sha256:87361a58627955f3b4979a7840b248dc839389c38ef84b33c2ca5165329da111"},
-    {file = "elevenlab-0.0.1.tar.gz", hash = "sha256:776957105b516c78c3aa5454c52e50364a50b26b5a4087dd2995006a80e50f7b"},
-]
 
 [[package]]
 name = "elevenlabs"
@@ -304,6 +294,16 @@ files = [
 
 [package.extras]
 tests = ["asttokens", "littleutils", "pytest", "rich"]
+
+[[package]]
+name = "ffmpeg"
+version = "1.4"
+description = "ffmpeg python package url [https://github.com/jiashaokun/ffmpeg]"
+optional = false
+python-versions = "*"
+files = [
+    {file = "ffmpeg-1.4.tar.gz", hash = "sha256:6931692c890ff21d39938433c2189747815dca0c60ddc7f9bb97f199dba0b5b9"},
+]
 
 [[package]]
 name = "gitdb"
@@ -1407,3 +1407,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 lock-version = "2.0"
 python-versions = "^3.10"
 content-hash = "d6244dda385e402d3f272de6282b0282f728909a8012e3922417975b08e7c537"
+
