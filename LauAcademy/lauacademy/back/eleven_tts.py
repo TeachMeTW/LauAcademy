@@ -5,6 +5,6 @@ set_api_key("0f1801c616b70c75cc368c071b8fa507")
 
 
 def gen(fname,text):
-    audio = generate(text=text, voice='Josh', model='eleven_monolingual_v1')
+    audio = generate(text=text, voice='Antoni', model='eleven_multilingual_v1')
     save(audio, fname)
     return

@@ -4,6 +4,7 @@ import google_tts
 import video_gen
 import dalleai
 import queries
+import compiler
 
 __all__ = [
     'text_to_image',
@@ -11,6 +12,7 @@ __all__ = [
     'google_tts',
     'video_gen',
     'dalleai',
-    'queries'
+    'queries',
+    'compiler'
     
 ]

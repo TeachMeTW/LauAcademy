@@ -3,6 +3,7 @@ import text_to_image
 import eleven_tts
 import nltk.data
 from moviepy.video.tools.subtitles import SubtitlesClip
+from queries import Queries
 nltk.download('punkt')
 
 
@@ -59,17 +60,33 @@ def create_slideshow(title,images, audio, text):
 
 
 
-def gen_voice_img(title, sentence):
+def gen_voice_img_ai(title, sentence, QueryHandler):
+
+    audio = []
+    k = text_to_image.search(title)
+    img = []
+    #img = text_to_image.get(title,k,len(sentence))
     
+    for x in range(len(sentence)):
+        audio.append(f'{title}_{x}.mp3')
+        eleven_tts.gen(f'{title}_{x}.mp3',sentence[x])
+        #print("sentence: ", sentence)
+        prompt = QueryHandler["sentence_to_prompt"](sentence[x])
+        #print("prompt: ",prompt)
+        img.append(QueryHandler["text_to_image"](prompt))
+        
+    return audio,img
+
+def gen_voice_img(title, sentence):
+
     audio = []
     k = text_to_image.search(title)
     img = text_to_image.get(title,k,len(sentence))
     
     for x in range(len(sentence)):
-        audio.append(f'{title}_{x}.mp3')
-        eleven_tts.gen(f'{title}_{x}.mp3',sentence[x])
+        audio.append(f'{x}.mp3')
+        eleven_tts.gen(f'{x}.mp3',sentence[x])
     return audio,img
-
 
 
 def tokenize(f):
