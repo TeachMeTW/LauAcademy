@@ -9,24 +9,12 @@ import urllib.request
 
 
 st.title('Lau Academy')
-image = Image.open('LauAcademy/lauacademy/front/media/dab.png')
+image = Image.open('LauAcademy/lauacademy/media/lau-academy-logo.png')
 st.image(image, caption='Kiaran - Founder | CEO | LauAcademy')
 
 
 st.write("Hello! Welcome to LauAcademy chatroom, type your questions below")
 st.text_input(label="Your Question:", key="textbox1")
-# st.file_uploader(
-#     label="Upload File",
-#     type=None,
-#     accept_multiple_files=False,
-#     key=None,
-#     help=None,
-#     on_change=None,
-#     args=None,
-#     kwargs=None,
-#     disabled=False,
-#     label_visibility="visible",
-# )
 
 uploaded_file = st.file_uploader("Upload Textbook (PDF)") 
 if uploaded_file is not None: # only uploads one file at a time
