@@ -61,7 +61,7 @@ def Queries(index_name, namespace):
         qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
         _input = prompt.format_prompt(document=search)
         output = qa(_input.to_string())
-        print(output)
+        #print(output)
         return output["result"]
 
     def query_flashcards(question, index_name):
@@ -76,7 +76,7 @@ def Queries(index_name, namespace):
         qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
         _input = prompt.format_prompt(document=search)
         output = qa(_input.to_string())
-        print(output)
+        #print(output)
         return output["result"]
 
 

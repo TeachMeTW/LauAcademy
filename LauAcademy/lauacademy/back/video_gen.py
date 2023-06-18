@@ -71,6 +71,7 @@ def gen_voice_img(title, sentence):
     return audio,img
 
 
+
 def tokenize(f):
     
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')

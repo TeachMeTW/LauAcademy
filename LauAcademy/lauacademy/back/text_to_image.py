@@ -1,7 +1,9 @@
 from urllib.request import urlopen, Request
 import requests
+from queries import Queries
 from bs4 import BeautifulSoup
 from pexels_api import API
+import json
 
 pexapi = API("5ZYueTnMLnd4dfhS98WMJQLPHor1uiJ3myWJprHnpFLd16qQvU4nji0z")
 
@@ -33,14 +35,3 @@ def get(tokenstring, images, end):
             
     return location
 
-
-def get_ai(tokenstring, images):
-    
-    #print(get_img)
-    location = []
-    img_data = requests.get(images).content
-    with open(f'LauAcademy/media/{tokenstring}.jpeg', 'wb') as handler:
-        location.append(f'./LauAcademy/media/{tokenstring}.jpeg')
-        handler.write(img_data)
-            
-    return location

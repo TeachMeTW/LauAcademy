@@ -35,7 +35,7 @@ QueryHandler = Queries("berkeleyhacks", 'atomic_habits.pdf')
 
 slides = json.loads(QueryHandler["slides"]("How do beliefs shape habits"))
 new = ((slides['sub_topics']))
-title = new[0](['image_description'].replace(' ','+'))
+title = ((new[0])['image_description']).replace(' ','+')
 
 get_ai(title, QueryHandler['text_to_image']("test"))
 #print(new)
