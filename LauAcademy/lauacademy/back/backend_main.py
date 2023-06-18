@@ -29,7 +29,7 @@ def gen_vid(query):
 
 
 
-slides = json.loads(Queries("berkeleyhacks")["slides"]("What are agents?"))
+slides = json.loads(Queries("berkeleyhacks", 'test.pdf')["slides"]("What are agents?"))
 new = ((slides['sub_topics']))
 
 gen_vid(new)
