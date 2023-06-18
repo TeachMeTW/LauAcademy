@@ -32,7 +32,6 @@ user_information = {
 }
 
 def onclick_confirm():
-    print('clicked confirm!')
     st.sidebar.success("Successfully confirmed your user data.")
     shared_data.store_user_information(user_information)
 
