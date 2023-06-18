@@ -6,7 +6,7 @@ authors = ["TeachMeTW <teachmetheways652@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10,<3.13"
 streamlit = "^1.23.1"
 pydantic = "^1.10.9"
 openai = "^0.27.8"
@@ -16,6 +16,13 @@ pinecone-client = "^2.2.2"
 pypdf = "^3.9.1"
 tiktoken = "^0.4.0"
 mindsdb-sdk = "^1.0.4"
+bs4 = "^0.0.1"
+elevenlabs = "^0.2.18"
+ffmpeg = "^1.4"
+moviepy = "^1.0.3"
+scipy = "^1.10.1"
+ez-setup = "^0.9"
+nltk = "^3.8.1"
 
 
 [build-system]
