@@ -53,7 +53,6 @@ class TextToSpeech:
         print(f"[COMPLETE] Created Narrations for {len(slides)} slide objects.")
         
         
-
 # Test Code
 tts = TextToSpeech()
 
