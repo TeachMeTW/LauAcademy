@@ -5,6 +5,17 @@ from PIL import Image
 import urllib.request
 
 
+image = Image.open('LauAcademy\media\lau-academy-logo.png')
+st.image(image, caption=None)
+
+st.markdown(
+    """
+    <style>
+    .title {
+        text-align: center;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 st.title('Lau Academy')
-image = Image.open('media/dab.png')
-st.image(image, caption='Kiaran - Founder | CEO | LauAcademy')
