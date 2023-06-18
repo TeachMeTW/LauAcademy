@@ -39,7 +39,7 @@ class TextToSpeech:
             input=synthesis_input, voice=self.voice, audio_config=self.audio_config
         )
         
-        with open(f"{output_destination}/output{index}.mp3", "wb") as out:
+        with open(f"{output_destination}/output{index+1}.mp3", "wb") as out:
             # The response's audio_content is binary.
             # Write the response to the output file.
             out.write(response.audio_content)
@@ -51,8 +51,8 @@ class TextToSpeech:
         for i in range(len(slides)):
             self.synthesize_text_index(slides[i]["narration"], i)
         print(f"[COMPLETE] Created Narrations for {len(slides)} slide objects.")
-        
-        
+
+
 # Test Code
 tts = TextToSpeech()
 
