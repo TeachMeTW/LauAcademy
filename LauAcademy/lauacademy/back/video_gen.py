@@ -2,7 +2,8 @@ from moviepy.editor import *
 import text_to_image
 import eleven_tts
 import nltk.data
-nltk.download('punkt')
+from moviepy.video.tools.subtitles import SubtitlesClip
+
 
 " PRE PROCESS THE TEXT HERE USING REGEX"
 
@@ -24,10 +25,18 @@ def create_slideshow(title,images, audio, text):
     for x in size:
         aud_clip =  AudioFileClip(audio[x])
         duration = aud_clip.duration
+        img = ImageClip(images[x]).set_duration(duration)
+        
+        
         audmap[f'amp_{x}'] = aud_clip
         
-        imgmap[f'ic_{x}'] = ImageClip(images[x]).set_duration(duration)
-        clip = TextClip(text[x], fontsize=20, color='white', method='caption', stroke_color='black', stroke_width=2, align='center')
+    
+        imgmap[f'ic_{x}'] = img
+        
+        
+        
+        clip = TextClip(text[x], fontsize=20, color='white', method='caption', stroke_color='black', stroke_width=1, align='south')
+
         clip = clip.set_duration(duration)
         textmap[f'txt_{x}'] = clip
         audmap[f'amp_{x}'] = AudioFileClip(audio[x])
@@ -56,20 +65,20 @@ def gen_voice_img(title, sentence):
     img = text_to_image.get(title,k,len(sentence))
     
     for x in range(len(sentence)):
-        audio.append(f'{x}.mp3')
-        eleven_tts.gen(f'{x}.mp3',sentence[x])
+        audio.append(f'title_{x}.mp3')
+        eleven_tts.gen(f'title_{x}.mp3',sentence[x])
     return audio,img
 
 
 def tokenize(f):
-    
+    nltk.download('punkt')
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
-    fp = open(f)
-    data = fp.read()
-    sentence = (tokenizer.tokenize(data))
+    sentence = (tokenizer.tokenize(f))
     return sentence
 
+'''
 sent = tokenize('test.txt')
 #print([x for x in sent])
 aud,img = gen_voice_img('Blocks', sent)
 create_slideshow('Blocks', img, aud, sent)
+'''

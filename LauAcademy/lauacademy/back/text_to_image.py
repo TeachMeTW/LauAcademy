@@ -1,19 +1,22 @@
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 import requests
 from bs4 import BeautifulSoup
 
 
 """Generate URLS from Token"""
 def search(tokenstring):
-    htmldata = urlopen(f"https://unsplash.com/s/photos/{tokenstring}")
-    soup = BeautifulSoup(htmldata, 'html.parser')
+    site = (f"https://www.pexels.com/search/{tokenstring}/")
+    hdr = {'User-Agent': 'Mozilla/5.0'}
+    req = Request(site,headers=hdr)
+    page = urlopen(req)
+    soup = BeautifulSoup(page,'html.parser')
     images = soup.find_all('img')
     
     imgurls = list(map(lambda v: v['src'], images))
     return imgurls
 
 
-"""Save 5 Images from URLS"""
+"""Save Images from URLS"""
 def get(tokenstring, images, end):
     get_img = images[1:end]
     location = []
