@@ -1,7 +1,7 @@
 from elevenlabs import clone, generate, play, set_api_key, save
 from elevenlabs.api import History
 
-set_api_key("19e159289a5a4b42f0f8066359b0d7ea")
+set_api_key("0f1801c616b70c75cc368c071b8fa507")
 
 
 def gen(fname,text):

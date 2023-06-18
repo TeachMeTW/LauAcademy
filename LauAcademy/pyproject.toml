@@ -23,6 +23,7 @@ moviepy = "^1.0.3"
 scipy = "^1.10.1"
 ez-setup = "^0.9"
 nltk = "^3.8.1"
+pexels-api = "^1.0.1"
 
 
 [build-system]

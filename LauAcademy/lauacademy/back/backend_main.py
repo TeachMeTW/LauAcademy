@@ -1,5 +1,6 @@
 from queries import Queries
 from video_gen import create_slideshow, gen_voice_img, tokenize
+from text_to_image import get_ai
 import json
 
 
@@ -8,6 +9,7 @@ def gen_vid(query):
     slist = []
     aud = []
     img = []
+    
     for x in query:
         #print(x['script'], '\n')
         title = (x['image_description'].replace(' ','+'))
@@ -21,18 +23,23 @@ def gen_vid(query):
         
     flatten_sentence = [item for sublist in slist for item in sublist]
     flatten_aud = [item for sublist in aud for item in sublist]
-    flatten_img = [item for sublist in img for item in sublist]  
+    flatten_img = [item for sublist in img for item in sublist] 
+    
    
     create_slideshow('title', flatten_img, flatten_aud, flatten_sentence)
-        
+    
+    
     return
 
+QueryHandler = Queries("berkeleyhacks", 'atomic_habits.pdf')
 
-
-slides = json.loads(Queries("berkeleyhacks", 'test.pdf')["slides"]("What are agents?"))
+slides = json.loads(QueryHandler["slides"]("How do beliefs shape habits"))
 new = ((slides['sub_topics']))
+title = (new['image_description'].replace(' ','+'))
 
-gen_vid(new)
+get_ai(title, QueryHandler['text_to_image']("test"))
+#print(new)
+#gen_vid(new)
 
 
 

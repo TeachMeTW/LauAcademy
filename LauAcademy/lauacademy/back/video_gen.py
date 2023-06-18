@@ -3,6 +3,7 @@ import text_to_image
 import eleven_tts
 import nltk.data
 from moviepy.video.tools.subtitles import SubtitlesClip
+nltk.download('punkt')
 
 
 " PRE PROCESS THE TEXT HERE USING REGEX"
@@ -20,7 +21,7 @@ def create_slideshow(title,images, audio, text):
     size = range(len(images))
     
     audmap = {}
-    textmap = {}
+    # textmap = {}
     imgmap = {}
     for x in size:
         aud_clip =  AudioFileClip(audio[x])
@@ -35,21 +36,21 @@ def create_slideshow(title,images, audio, text):
         
         
         
-        clip = TextClip(text[x], fontsize=20, color='white', method='caption', stroke_color='black', stroke_width=1, align='south')
+        #clip = TextClip(text[x], fontsize=20, color='white', method='caption', stroke_color='black', stroke_width=1, align='south')
 
-        clip = clip.set_duration(duration)
-        textmap[f'txt_{x}'] = clip
+        #clip = clip.set_duration(duration)
+        #textmap[f'txt_{x}'] = clip
         audmap[f'amp_{x}'] = AudioFileClip(audio[x])
         
     
     au = list(audmap.values())
     im = list(imgmap.values())
-    tx = list(textmap.values())
+    #tx = list(textmap.values())
     
     combine_images = concatenate(im, method="compose")
-    combine_texts = concatenate(tx, method="compose")
+    #combine_texts = concatenate(tx, method="compose")
     combine_aud = concatenate_audioclips(au)
-    composite = CompositeVideoClip([combine_images, combine_texts])
+    composite = CompositeVideoClip([combine_images])
     
     voiceover = composite.set_audio(combine_aud)
     voiceover.write_videofile(f'{title}.mp4', fps=24)
@@ -65,13 +66,13 @@ def gen_voice_img(title, sentence):
     img = text_to_image.get(title,k,len(sentence))
     
     for x in range(len(sentence)):
-        audio.append(f'title_{x}.mp3')
-        eleven_tts.gen(f'title_{x}.mp3',sentence[x])
+        audio.append(f'{title}_{x}.mp3')
+        eleven_tts.gen(f'{title}_{x}.mp3',sentence[x])
     return audio,img
 
 
 def tokenize(f):
-    nltk.download('punkt')
+    
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
     sentence = (tokenizer.tokenize(f))
     return sentence

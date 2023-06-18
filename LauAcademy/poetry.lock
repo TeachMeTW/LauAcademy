@@ -1449,6 +1449,20 @@ qa = ["flake8 (==3.8.3)", "mypy (==0.782)"]
 testing = ["docopt", "pytest (<6.0.0)"]
 
 [[package]]
+name = "pexels-api"
+version = "1.0.1"
+description = "Use Pexels API v1 with Python"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pexels-api-1.0.1.tar.gz", hash = "sha256:89934dbe0e37481234c5659883be0958de0f809740b9874b9d2caaa974f9d0bf"},
+    {file = "pexels_api-1.0.1-py3-none-any.whl", hash = "sha256:3923eab214e6469a9b9fc6bc5a2d692e206a5c45f9f82b4ce1a685508057037e"},
+]
+
+[package.dependencies]
+requests = "*"
+
+[[package]]
 name = "pexpect"
 version = "4.8.0"
 description = "Pexpect allows easy control of interactive console applications."
@@ -2731,4 +2745,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "a73ae366ab965cb33382dc59eb7ea6f4c19dd5c45019172dd16916565c9f2911"
+content-hash = "0a5af25e21e8442ebb86155ebbccf5c71f324b6062fe19fd743f5346a9fbbfe0"
