@@ -27,8 +27,8 @@ def create_slideshow(title,images, audio, text):
         audmap[f'amp_{x}'] = aud_clip
         
         imgmap[f'ic_{x}'] = ImageClip(images[x]).set_duration(duration)
-        clip = TextClip(text[x], fontsize=20, color='white')
-        clip = clip.set_pos('center').set_duration(duration)
+        clip = TextClip(text[x], fontsize=20, color='white', method='caption', stroke_color='black', stroke_width=2, align='center')
+        clip = clip.set_duration(duration)
         textmap[f'txt_{x}'] = clip
         audmap[f'amp_{x}'] = AudioFileClip(audio[x])
         
@@ -71,5 +71,5 @@ def tokenize(f):
 
 sent = tokenize('test.txt')
 #print([x for x in sent])
-aud,img = gen_voice_img('Roblox', sent)
-create_slideshow('Roblox', img, aud, sent)
+aud,img = gen_voice_img('Blocks', sent)
+create_slideshow('Blocks', img, aud, sent)
