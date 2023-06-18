@@ -19,7 +19,9 @@ from langchain.output_parsers import PydanticOutputParser
 from langchain.chat_models import ChatOpenAI
 from langchain.chains import RetrievalQA
 import mindsdb_sdk
-
+from langchain.chat_models import ChatOpenAI
+chat = ChatOpenAI(temperature=0, openai_api_key=openai_meta["keys"]["api"], openai_organization=openai_meta["keys"]["org"])
+from langchain.schema import AIMessage, HumanMessage, SystemMessage
 server = mindsdb_sdk.connect(login=os.getenv("MINDSDB_LOGIN"), password=os.getenv('MINDSDB_PASS'))
 project = server.get_project()
 pinecone.init(api_key="bfad758d-abb5-409b-a2e7-ddc05f731db8", environment="us-west1-gcp-free")
@@ -89,13 +91,24 @@ def Queries(index_name, namespace):
         url = pred.fetch().img_url
         return url[0]
     
-
-
+    def sentence_to_prompt(sentence):
+        messages = [
+        SystemMessage(
+            content="You are a helpful assistant that converts a sentence to keywords"
+        ),
+        HumanMessage(
+            content="description:\n" + sentence + "\nkeywords:\n"
+        ),
+        ]
+        response = chat(messages)
+        return response.content
+    
     return {
         "flashcards": lambda prompt: query_flashcards(prompt, index_name),
         "slides": lambda prompt: query_slides(prompt, index_name),
         "text_to_image": lambda prompt: text_to_image(prompt),
         "store_pdf": store_pdf,
+        "sentence_to_prompt":sentence_to_prompt,
         "database": {
             "deleteAll": lambda : index.delete(deleteAll="true")
         }
