@@ -41,3 +41,14 @@ if uploaded_file is not None: # only uploads one file at a time
     st.write(dataframe)
     
     # print("YourPersonalAcademicBot:", response)
+    
+def callback(uploaded_file):
+  print(uploaded_file)
+  with io.open(uploaded_file, "rb") as f:
+      file_content = f.read() #read file
+  st.write("File content:", file_content)
+
+uploaded_file = st.file_uploader("Upload a file (PDF):", on_change=callback) # Create file uploader
+
+if uploaded_file:
+  print(uploaded_file)
