@@ -14,10 +14,13 @@ def search(tokenstring):
 
 
 """Save 5 Images from URLS"""
-def printfive(tokenstring, images):
-    getfive = images[1:6]
-    for x in range(len(getfive)):
-        img_data = requests.get(getfive[x]).content
+def get(tokenstring, images, end):
+    get_img = images[1:end]
+    location = []
+    for x in range(len(get_img)):
+        img_data = requests.get(get_img[x]).content
         with open(f'LauAcademy/media/{tokenstring}_{x}.jpg', 'wb') as handler:
+            location.append(f'./LauAcademy/media/{tokenstring}_{x}.jpg')
             handler.write(img_data)
             
+    return location
