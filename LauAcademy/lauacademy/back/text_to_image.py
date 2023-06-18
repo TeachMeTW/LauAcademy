@@ -20,3 +20,4 @@ def printfive(tokenstring, images):
         img_data = requests.get(getfive[x]).content
         with open(f'LauAcademy/media/{tokenstring}_{x}.jpg', 'wb') as handler:
             handler.write(img_data)
+            
