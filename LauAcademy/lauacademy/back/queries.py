@@ -24,8 +24,8 @@ server = mindsdb_sdk.connect(login=os.getenv("MINDSDB_LOGIN"), password=os.geten
 project = server.get_project()
 pinecone.init(api_key="bfad758d-abb5-409b-a2e7-ddc05f731db8", environment="us-west1-gcp-free")
 embeddings = OpenAIEmbeddings(openai_api_key=openai_meta["keys"]["api"], openai_organization=openai_meta["keys"]["org"])
-# Store the embeddings in the Pinecone index
-#index.add_documents(embeddings)
+llm = ChatOpenAI(model_name='gpt-4', openai_api_key=openai_meta["keys"]["api"],openai_organization=openai_meta["keys"]["org"])
+
 def Queries(index_name):
     class Slide(BaseModel):
         script: str = Field(description="a script explaining the topic in great detail without referencing to examples")
@@ -56,7 +56,6 @@ def Queries(index_name):
             template="Document:\n{document}\n\nGenerate detailed slides for an educational video based on the document. Each slide should include a narration teaching the subject in detail, and a label for the image that will be shown.\n{format_instructions}\n",
             partial_variables={"format_instructions": parser.get_format_instructions()},
         )
-        llm = ChatOpenAI(model_name='gpt-4', openai_api_key=openai_meta["keys"]["api"],openai_organization=openai_meta["keys"]["org"])
         vectordb = Pinecone.from_existing_index(index_name, embeddings)
         search = vectordb.similarity_search(question)
         retriever = vectordb.as_retriever()
@@ -67,13 +66,11 @@ def Queries(index_name):
 
     def query_flashcards(question, index_name):
         parser = PydanticOutputParser(pydantic_object=Test)
-        print(parser.get_format_instructions())
         prompt = PromptTemplate(
             input_variables=["document"],
             template="Document:\n{document}\n\nGenerate a test:\n{format_instructions}\n",
             partial_variables={"format_instructions": parser.get_format_instructions()},
         )
-        llm = ChatOpenAI(model_name='gpt-4', openai_api_key=openai_meta["keys"]["api"],openai_organization=openai_meta["keys"]["org"])
         vectordb = Pinecone.from_existing_index(index_name, embeddings)
         search = vectordb.similarity_search(question)
         retriever = vectordb.as_retriever()
@@ -92,8 +89,9 @@ def Queries(index_name):
         url = pred.fetch().img_url
         return url[0]
 
-        return {
-            "flashcards": lambda prompt: query_flashcards(prompt, index_name),
-            "slides": lambda prompt: query_slides(prompt, index_name),
-            "text_to_image": lambda prompt: text_to_image(prompt)
-        }
+    return {
+        "flashcards": lambda prompt: query_flashcards(prompt, index_name),
+        "slides": lambda prompt: query_slides(prompt, index_name),
+        "text_to_image": lambda prompt: text_to_image(prompt),
+        "store_pdf": store_pdf
+    }
