@@ -1,4 +1,3 @@
 from queries import Queries
-slideshows = Queries("berkeleyhacks", "test.pdf")["flashcards"]("Agents")
+slideshows = Queries("berkeleyhacks", "")["store_pdf"]("./lauacademy/back/data/pdf/atomic_habits.pdf")
 
-print(slideshows)

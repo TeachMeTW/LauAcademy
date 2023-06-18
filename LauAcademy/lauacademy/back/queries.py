@@ -35,7 +35,7 @@ def Queries(index_name, namespace):
         code: str = Field(description="If there is code required, this field wild display it")
 
     class Slides(BaseModel):
-        sub_topics: List[Slide] = Field(description="A JSON object in the format:\n{script:<a script explaining the topic in great detail without referencing to examples>,\ndetails:<bullet points that will be on the slides>\nimage_description:<image label>,\ncode:<optional, string>}")
+        sub_topics: List[Slide] = Field(description="A JSON object representing a detailed slideshow in the format:\n{script:<a script explaining the topic in great detail without referencing to examples>,\ndetails:<bullet points that will be on the slides>\nimage_description:<image label>,\ncode:<optional, string>}")
 
     class QA(BaseModel):
         questions: str = Field(description="question")
@@ -61,7 +61,6 @@ def Queries(index_name, namespace):
         qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
         _input = prompt.format_prompt(document=search)
         output = qa(_input.to_string())
-        print(output)
         return output["result"]
 
     def query_flashcards(question, index_name):
@@ -76,7 +75,6 @@ def Queries(index_name, namespace):
         qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
         _input = prompt.format_prompt(document=search)
         output = qa(_input.to_string())
-        print(output)
         return output["result"]
 
 
