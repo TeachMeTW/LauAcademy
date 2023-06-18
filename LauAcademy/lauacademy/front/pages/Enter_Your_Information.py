@@ -13,19 +13,10 @@ def callback_success():
         time.sleep(1/50)
     st.sidebar.success("Successfully uploaded your textbook!\nCheck the \"See The Result\" Tab.")
 
-# TODO: FINISH TEST
-def callback_test_name():
-    time.sleep(1/10)
-    print(f'[Enter_Your_Information.py] Callback: Set Name')
-    shared_data.set_test("tempalte:")
-    if name:
-        print(f'[Enter_Your_Information.py] Found Name: {name}')
-        shared_data.set_test(name)
-
 image = Image.open('LauAcademy/lauacademy/media/enter-your-information-high-resolution-color-logo.png')
 st.image(image)
 st.subheader("This will help shape your lecture plans.")
-name = st.text_input(label="What is your name?", key="t0", on_change=callback_test_name)
+name = st.text_input(label="What is your name?", key="t0")
 educational_background = st.text_input(label="What is your educational background?", key="t1")
 desired_career = st.text_input(label="What is your desired career?", key="t2")
 class_subject = st.text_input(label="What is the subject of this class?", key="t3")
