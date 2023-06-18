@@ -7,15 +7,22 @@ from io import StringIO
 from PIL import Image
 import urllib.request
 
+st.set_page_config(
+    page_title="Kon Academy",
+    page_icon="📘",
+)
 
-st.title('Lau Academy')
-image = Image.open('LauAcademy/lauacademy/media/lau-academy-logo.png')
-st.image(image, caption='Kiaran - Founder | CEO | LauAcademy')
+st.sidebar.success("Select a page from above")
+
+image = Image.open('LauAcademy/lauacademy/media/kon-academy.png')
+st.image(image, caption=None)
 
 
-st.write("Hello! Welcome to LauAcademy chatroom, type your questions below")
+st.header("👋📘 Hello! Welcome to :blue[Kon Academy].")
+st.write("Type your questions below!")
 st.text_input(label="Your Question:", key="textbox1")
 
+# Question: How would I combine streamlit file_uploader element and feed the PDF file into a pinecone vector database?
 uploaded_file = st.file_uploader("Upload Textbook (PDF)") 
 if uploaded_file is not None: # only uploads one file at a time
     bytes_data = uploaded_file.getvalue() # read file as bytes
@@ -30,7 +37,6 @@ if uploaded_file is not None: # only uploads one file at a time
     dataframe = pd.read_csv(uploaded_file) # to accept files
     st.write(dataframe)
     
-    # print("YourPersonalAcademicBot:", response)
     
 def callback(uploaded_file):
   print(uploaded_file)
